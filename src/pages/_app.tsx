@@ -13,6 +13,8 @@ import { AuthProvider } from '~/containers/Subscription/auth'
 import { useAuthBridge } from '~/hooks/useAuthBridge'
 import { useParentAuthTracker } from '~/hooks/useParentAuthTracker'
 import { useUmamiIdentityTracker } from '~/hooks/useUmamiIdentityTracker'
+import { useAuthContext } from '~/containers/Subscription/auth'
+import { useRouter } from 'next/router'
 
 NProgress.configure({ showSpinner: false })
 
@@ -127,6 +129,15 @@ function App({ Component, pageProps }: AppProps) {
 
 	useAuthBridge()
 	useParentAuthTracker()
+	const { hasActiveSubscription } = useAuthContext()
+	const showFloatingButton =
+		hasActiveSubscription &&
+		!router.pathname.startsWith('/ai') &&
+		!router.pathname.startsWith('/mcp') &&
+		!router.pathname.startsWith('/account') &&
+		!router.pathname.startsWith('/subscription') &&
+		!router.pathname.includes('/superluminal')
+
 	useUmamiIdentityTracker()
 
 	return (
