@@ -249,6 +249,7 @@ export interface IMultiSeriesChartProps {
 	valueSymbol?: string
 	yAxisSymbols?: string[]
 	alwaysShowTooltip?: boolean
+	showAggregateInTooltip?: boolean
 	hideDataZoom?: boolean
 	hideDownloadButton?: boolean
 	title?: string
